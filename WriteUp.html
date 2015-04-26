@@ -38,10 +38,13 @@ a first attempt at model construction a PCA/GLM approach was used. The
 41 principal components discussed in the section on feature selection
 were used in the analysis. This approach was somewhat limited, as it
 only allowed for a binary outcome, and so infomation was lost regarding
-how an exercise was incorrectly perfomed. The results are listed in the summary table in the discussion section. </div>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br><div style="margin-left: 40px;"><h3><span style="color: rgb(51, 51, 51);">RPart</span>&nbsp;</h3></div><div style="margin-left: 40px;">In our next appoach, we examined a classification tree approach.
+how an exercise was incorrectly perfomed. The results are listed in the summary table in the discussion section. </div>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br><div style="margin-left: 40px;"><h3><span style="color: rgb(51, 51, 51);">RPart</span>&nbsp;</h3></div><div style="margin-left: 40px;">In
+our next appoach, we examined a classification tree approach.
 As a first approximaton to estimate the accuracy of the approach we
 classified a binary outcome for the classe variable. "A" (correct) or
-"not A".&nbsp;Results are listed in the summary table in the discussion section. The accuracy was not sufficent, and so a third model approach was examined. </div><h3 style="margin-left: 40px; color: rgb(51, 51, 51);">Random Forest</h3><div style="margin-left: 40px;">In our final model, a random forest approach was used. Although much more computationally intensive,
+"not A".&nbsp;Results are listed in the summary table in the discussion
+section. The accuracy was not sufficent, and so a third model approach
+was examined. </div><h3 style="margin-left: 40px; color: rgb(51, 51, 51);">Random Forest</h3><div style="margin-left: 40px;">In our final model, a random forest approach was used. Although much more computationally intensive,
 this approach proved to give a much smaller expected out of sample
 error. Again, we first examined a binary outcome for the classe
 variable before running the model with the detailed classe variable
@@ -60,4 +63,4 @@ balance between accuracy and computational load. However, it quickly
 became clear that a sufficient amount of accuracy could not be obtained
 with these models. The first initial tests using the random forest
 approach and a binary class outcome were very promising, and so this
-model was chosen as the final testing model.<br><br></body></html>
+model was chosen as the final testing model. Our expected out of sample error is: 0.71%.<br><br></body></html>
