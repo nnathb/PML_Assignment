@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><meta content="text/html; charset=UTF-8" http-equiv="content-type"><title>WriteUp</title></head>
+<body><h1>Project: Weight Lifting Exercises Dataset<br></h1>The WLE
+dataset was collected in order to determine how well an activity was
+perfomed. Detailed information on the data collection is described in
+the following paper: <br><br><a class="colaborador" href="http://groupware.les.inf.puc-rio.br/collaborator.jsf?p1=evelloso">Velloso,
+				E.</a>; Bulling, A.; Gellersen, H.; <a class="colaborador" href="http://groupware.les.inf.puc-rio.br/collaborator.jsf?p1=ugulino">Ugulino, W.</a>; <a class="colaborador" href="http://groupware.les.inf.puc-rio.br/collaborator.jsf?p1=hugo">Fuks, H.</a> <strong><a class="publicacao" href="http://groupware.les.inf.puc-rio.br/work.jsf?p1=11201" title="Qualitative Activity Recognition of Weight Lifting Exercises">Qualitative
+					Activity Recognition of Weight Lifting Exercises</a></strong>. Proceedings of
+			4th International Conference in Cooperation with SIGCHI (Augmented
+			Human '13) . Stuttgart, Germany: ACM SIGCHI, 2013.
+
+		<br> <h2>Question</h2>The
+question we aim to answer is: How well were the exercises performed?
+Correctly or incorrectly? If the exercise was not performed correctly,
+we also aim to determine in what fashion the exercise was performed
+incorrectly. <h2>Data</h2>Data was collected from six participants,
+who were asked to perform repetitions of dumbbell bicep curls. The
+participants were equipped with four sensors, located on the belt, arm,
+forearm and dumbbell, and were asked to perform the curls in five
+fashions, one correctly (class A), and four incorrect fashions (classes
+B, C, D, and E).&nbsp; For further details on the specifications, we
+refer the reader to the published paper. In total, 160 variables are
+reported, including the classe variable. <h2>Feature Selection</h2>Features were first examined by sensor<span style="font-weight: bold;">. </span>A total of 41 features were selected for the analysis as outlined below<span style="font-weight: bold;">:<br></span><h3 style="margin-left: 40px; color: rgb(51, 51, 51);">Arm</h3><div style="margin-left: 40px;">39
+variables are associated to the arm sensor. Of these, mostly are
+statistics derived from other variables, and were thus discarded. 13
+features remained. Of these we found three pairs of highly correlated
+features, as so were able to compress the number of arm features to 10.</div><br><h3 style="margin-left: 40px; color: rgb(51, 51, 51);">Forearm</h3><div style="margin-left: 40px;">Similarly
+to the arm sensor, the 39 associated features were reduced to 13. Of
+these, in our training sets we did not detect any highly correlated
+features.</div><br><h3 style="margin-left: 40px; color: rgb(51, 51, 51);">Belt</h3><div style="margin-left: 40px;">Once
+again, the 39 associated features were reduced to 13. In the belt
+detected two sets of highly correlated features: one set of five
+features, and one set of three features. We were thus able to compress
+the number of features for the belt to seven features. <span style="font-weight: bold;"><br><br></span><h3 style="color: rgb(51, 51, 51);">Dumbbell</h3>The
+39 associated features were reduced to 13, and further reduced to 11
+features as two pairs of highly correlated features were detected.<span style="font-weight: bold;"></span></div><h2>Model Construction&nbsp;</h2><h3 style="margin-left: 40px; color: rgb(51, 51, 51);">PCA/GLM</h3><div style="margin-left: 40px;">As
+a first attempt at model construction a PCA/GLM approach was used. The
+41 principal components discussed in the section on feature selection
+were used in the analysis. This approach was somewhat limited, as it
+only allowed for a binary outcome, and so infomation was lost regarding
+how an exercise was incorrectly perfomed. The results are listed in the summary table in the discussion section. </div>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br><div style="margin-left: 40px;"><h3><span style="color: rgb(51, 51, 51);">RPart</span>&nbsp;</h3></div><div style="margin-left: 40px;">In
+our next appoach, we examined a classification tree approach.
+As a first approximaton to estimate the accuracy of the approach we
+classified a binary outcome for the classe variable. "A" (correct) or
+"not A".&nbsp;Results are listed in the summary table in the discussion
+section. The accuracy was not sufficent, and so a third model approach
+was examined. </div><h3 style="margin-left: 40px; color: rgb(51, 51, 51);">Random Forest</h3><div style="margin-left: 40px;">In our final model, a random forest approach was used. Although much more computationally intensive,
+this approach proved to give a much smaller expected out of sample
+error. Again, we first examined a binary outcome for the classe
+variable before running the model with the detailed classe variable
+information. A confusion matrix resulting from a cross validation run
+is displayed below.&nbsp; </div><h4 style="margin-left: 80px;">Confusion Matrix (RF)</h4><table style="text-align: left; background-color: rgb(255, 255, 204); height: 193px; width: 485px; margin-left: 0px;" border="1" cellpadding="2" cellspacing="2"><tbody><tr><td style="width: 130px;">Prediction\ Reference</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr><tr><td style="width: 130px;">A</td><td>2231</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td style="width: 130px;">B</td><td>10</td><td>1507</td><td>1</td><td>0</td><td>0</td></tr><tr><td style="width: 130px;">C</td><td>0</td><td>8</td><td>1351</td><td>9</td><td>0</td></tr><tr><td style="width: 130px;">D</td><td>0</td><td>1</td><td>24</td><td>1261</td><td>0</td></tr><tr><td style="width: 130px;">E</td><td>0</td><td>1</td><td>1</td><td>6</td><td>1434</td></tr></tbody></table><h2>Cross Validation</h2>In
+each of the above described model constructions, the training set was
+resampled four times into a training and a testing subset. &nbsp;A
+different seed was specified for each resampling. The out-of-sample
+errors reported in the summary section are the mean values obtained
+from the cross-validation.<h2>Summary &amp; Discussion</h2>The expected
+out-of-sample errors for the three models discussed are reported in the
+table below. The error calculated for each cross validation run is
+shown, along with the mean value per model. <h3 style="margin-left: 40px;">Expected Out-of-Sample Errors</h3><table style="text-align: left; height: 172px; width: 432px; margin-left: 38px; background-color: rgb(255, 255, 204);" border="1" cellpadding="2" cellspacing="2"><tbody><tr><td style="width: 165px;">Out-of-sample-error (%)</td><td>PCA</td><td>Rpart</td><td>RF</td></tr><tr><td style="width: 165px;">CV 1</td><td>13.79</td><td>17.34</td><td>0.46</td></tr><tr><td style="width: 165px;">CV 2</td><td>14.22</td><td>17.83</td><td>0.79</td></tr><tr><td style="width: 165px;">CV 3</td><td>13.19</td><td>17.35</td><td>0.92</td></tr><tr><td style="width: 165px;">CV 4</td><td>14.30</td><td>17.09</td><td>0.68</td></tr><tr><td style="width: 165px;">Mean</td><td>13.88</td><td>17.40</td><td>0.71</td></tr></tbody></table><br>The
+first two models presented were chosen while trying to achieve a
+balance between accuracy and computational load. However, it quickly
+became clear that a sufficient amount of accuracy could not be obtained
+with these models. The first initial tests using the random forest
+approach and a binary class outcome were very promising, and so this
+model was chosen as the final testing model. Our expected out of sample error is: 0.71%.<br><br></body></html>
